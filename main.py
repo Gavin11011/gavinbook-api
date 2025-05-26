@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
 app = FastAPI()
 
@@ -39,3 +40,7 @@ def get_all_contents():
 def get_content_by_id(content_id: str):
     content = next((item for item in contents if item["id"] == content_id), None)
     return content if content else {"error": "未找到内容"}
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000)
+
